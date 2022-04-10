@@ -149,8 +149,7 @@
     width: 32px;
     display: block;
     top: 50%;
-    height: 32px;
-    background-image: url('../img/controls.png');
+    height: 32px;   
     cursor: pointer;
     position: absolute;
     z-index: 99;
