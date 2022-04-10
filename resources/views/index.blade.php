@@ -71,7 +71,7 @@ Prueba | America Car Central
                             </div>
                             <div>
                                 <br><br>
-                                <h1 class="titulo-producto">Volkswagen Jetta cambio</h1>
+                                <h1 class="titulo-producto">Volkswagen Jetta</h1>
 
 
                                 <div class="columa">
