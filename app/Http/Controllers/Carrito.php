@@ -74,14 +74,14 @@ class Carrito extends Controller
         return response()->json($respuesta);
     }
 
-   
+
     public function update(Request $request)
     {
         $carrito = session('carrito');
         $datos = $request['carrito'];
-        foreach( $carrito as $key => $value) {
-            foreach($datos as $items => $value_ ){
-                if(  $carrito[$key]['claveProducto'] == $datos[$items]['clave'] ){
+        foreach ($carrito as $key => $value) {
+            foreach ($datos as $items => $value_) {
+                if ($carrito[$key]['claveProducto'] == $datos[$items]['clave']) {
                     $carrito[$key]['items'] = $datos[$items]['items'];
                 }
             }
@@ -91,21 +91,25 @@ class Carrito extends Controller
 
         $respuesta['status'] = 200;
         $respuesta['msg'] = 'Actualizado';
-        return response()->json( $respuesta);
+        return response()->json($respuesta);
     }
 
 
     public function destroy(Request $request)
     {
 
-
-        $carrito = session('carrito');
-        unset($carrito[$request['idProducto']]);
-        /*   $carrito = array_values($carrito); */
-        session(['carrito' =>  $carrito]);
-
-        $respuesta['status'] = 200;
-        $respuesta['msg'] = 'Se agrego con exito';
+        if ($request['evento'] == 'reiniciar') {
+            session(['carrito' =>  []]);
+            $respuesta['status'] = 200;
+            $respuesta['msg'] = 'Filnalizo con exito';
+        } else {
+            $carrito = session('carrito');
+            unset($carrito[$request['idProducto']]);
+            /*   $carrito = array_values($carrito); */
+            session(['carrito' =>  $carrito]);
+            $respuesta['status'] = 200;
+            $respuesta['msg'] = 'Se agrego con exito';
+        }
 
         return response()->json($respuesta);
     }

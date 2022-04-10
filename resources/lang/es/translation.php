@@ -29,7 +29,9 @@ return[
     'pax' => 'Vehículos:',
     'info' => 'Informacion del cliente',
     'eliminar' => 'Se elimino un producto del carrito',
-    'atencion' => 'Atencion'
+    'atencion' => 'Atencion',
+    'cliente' => 'Cliente',
+    'datalle' => 'Detalles de compras'
 ]
 
 ?>

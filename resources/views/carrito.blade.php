@@ -47,30 +47,31 @@
 
                     <fieldset id="customer_information">
                         <legend>@lang('translation.info')</legend>
-                        <div class="customer_name">
-                            <label for="customer_name_input">@lang('translation.nombre'):</label>
-                            <input type="text" id="customer_name_input" value="">
-                        </div>
-                        <div class="elemento customer_last_name">
-                            <label for="customer_last_name_input">@lang('translation.apellidos'):</label>
-                            <input type="text" id="customer_last_name_input" value="">
-                        </div>
-                        <div class="elemento customer_email">
-                            <label for="customer_email_input">@lang('translation.correo'):</label>
-                            <input type="email" id="customer_email_input" value="">
-                        </div>
-                        <div class="elemento customer_number_phone">
-                            <label for="customer_number_phone_input">@lang('translation.tel'):</label>
-                            <input type="number" id="customer_number_phone_input" value="">
-                        </div>
+
+                        <form id="reserva" class="needs-validation">
+                            <div class="customer_name">
+                                <label for="customer_name_input">@lang('translation.nombre')(*):</label>
+                                <input type="text" id="customer_name_input" name="customer_name" class="validacion" required value="">
+                            </div>
+                            <div class="elemento customer_last_name">
+                                <label for="customer_last_name_input">@lang('translation.apellidos')(*):</label>
+                                <input type="text" id="customer_last_name_input" name="customer_last_name" class="validacion" required value="">
+                            </div>
+                            <div class="elemento customer_email">
+                                <label for="customer_email_input">@lang('translation.correo')(*):</label>
+                                <input type="email" id="customer_email_input" name="customer_email" class="validacion" required value="">
+                            </div>
+                            <div class="elemento customer_number_phone">
+                                <label for="customer_number_phone_input">@lang('translation.tel'):</label>
+                                <input type="number" id="customer_number_phone_input" name="customer_number_phone" class="validacion" value="">
+                            </div>
+                        </form>
 
                     </fieldset>
 
                     <fieldset id="metodo_pago" class="metodo_pago">
-                        <button class="boton_pay" onclick="pagar()">@lang('translation.continuar')</button>
+                        <button class="boton_pay" type="submit" onclick="pagar()">@lang('translation.continuar')</button>
                     </fieldset>
-
-
                 </div>
             </div>
 
@@ -128,28 +129,56 @@
 
         <div class="modal-content">
             <span id="close" class="close">&times;</span>
-            <p style="font-weight: bold;font-size: 18px;">Presupuesto</p>
+            <p style="font-weight: bold;font-size: 18px;">@lang('translation.datalle')</p>
             <hr style=" height: 1px;   background-color: #0052a1;   border-style: none;">
+            <fieldset>
+                <legend>@lang('translation.info')</legend>
+                <div id="infoCliente">
+                </div>
+            </fieldset>
+            <hr style="height: 1px;   background-color: #968a8a;   border-style: none;">
             <div id="presupuesto">
             </div>
+            <hr style="height: 1px;   background-color: #968a8a;   border-style: none;">
+            <p style="text-align: center;font-size: 23px;font-family: cursive;color: #0052a1;">Gracias por su compra!!</p>
         </div>
 
     </div>
 
+    <style>
+        .invalid {
+            border: 2px solid red !important;
+        }
+
+        textarea:focus,
+        input:focus,
+        input[type]:focus {
+            outline: 0 none;
+        }
+
+        .valid {
+            border-color: #28a745;
+        }
+    </style>
 
 
     <script>
-
         //efectos del sitio
         var modal = document.getElementById("myModal");
         var span = document.getElementById("close");
 
         span.onclick = function() {
             modal.style.display = "none";
+            var frm = document.getElementById("reserva");
+            frm.reset();
+            reiniciar();
         }
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+                var frm = document.getElementById("reserva");
+            frm.reset();
+                reiniciar();
             }
         }
         $('.show').on('click', () => {
@@ -161,6 +190,8 @@
             $('.vista_resumen_body').hide()
             $('.vista_resumen_header').hide()
             $('.show').show()
+
+           
         })
 
         //vista del sistema
@@ -183,19 +214,7 @@
                     if (data.status === 200) {
 
                         for (const key in data.data) {
-                            output += `<div class='ticket' id='ticket_tag-wave1'>
-                                <div class='ticket_item'>
-                                    <p>  ${data.data[key].nombre}</p>
-                                </div>
-
-                                <div class='ticket_number'>
-                                    <input type="number" id="${data.data[key].claveProducto}" value="${data.data[key].items}" name="tentacles" min="1" max="10" style="width: 58px;">
-                                </div>
-                                <div class='ticket_price' style="text-align: center;" data-id="${data.data[key].precio}"><span>$${data.data[key].precio} USD</span> </div>
-                                <div class='ticket_accion'>
-                                    <button onclick="deleteItem(${key})" style="background: none;  border: none;"><span style="color: red;  " class="material-icons">delete</span></button>
-                                </div>
-                            </div>`;
+                            output += `<div class='ticket' id='ticket_tag-wave1'> <div class='ticket_item'> <p> ${data.data[key].nombre}</p></div><div class='ticket_number'> <input type="number" id="${data.data[key].claveProducto}" value="${data.data[key].items}" name="tentacles" min="1" max="10" style="width: 58px;"> </div><div class='ticket_price' style="text-align: center;" data-id="${data.data[key].precio}"><span>$${data.data[key].precio} USD</span> </div><div class='ticket_accion'> <button onclick="deleteItem(${key})" style="background: none; border: none;"><span style="color: red; " class="material-icons">delete</span></button> </div></div>`;
                         }
 
 
@@ -245,13 +264,10 @@
             carrito = $('#carrito')[0].children;
             itemArray = new Array();
             for (const key in carrito) {
-
                 try {
                     inputid = carrito[key].children[1].children[0].id;
                     precio = carrito[key].children[2].dataset.id;
                     items = $(`#${inputid}`).val();
-
-
                     itemArray.push({
                         clave: inputid,
                         precio: precio,
@@ -326,69 +342,101 @@
             });
         }
 
-        // vista del presupuesto y datos del cliente
+        const validacion = (idformulario) => {
+            var fom = $(`#${idformulario}`)[0],
+                object;
+
+            let boolean = true;
+            for (const iterator of fom) {
+                object = {
+                    iterator
+                };
+                try {
+                    if ($(`#${object.iterator.id}`).is(':invalid')) {
+                        $(`#${object.iterator.id}`).focus();
+                        $(`#${object.iterator.id}`).addClass("invalid");
+                        boolean = false
+                        break;
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            for (const iterator of fom) {
+                object = {
+                    iterator
+                };
+                try {
+                    if (!($(`#${object.iterator.id}`).is(':focus'))) {
+                        $(`#${object.iterator.id}`).removeClass("invalid");
+                    }
+                } catch (error) {
+
+                }
+            }
+
+            return boolean;
+        }
+
+
+        function datos(FormData) {
+            var json = {};
+            FormData.forEach((value, key) => {
+                json[key] = value;
+            });
+            return json;
+        }
 
         const pagar = () => {
             let output = '';
             var modal = document.getElementById("myModal");
+            var forms = document.getElementsByClassName('needs-validation');
 
-            $.ajax({
-                url: "{{ route('carrito.get') }}",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                method: 'GET',
-                beforeSend: function() {
+            // Loop over them and prevent submission
 
-                },
-                success: function(data) {
+            if (validacion('reserva')) {
+                $.ajax({
+                    url: "{{ route('carrito.get') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    method: 'GET',
+                    beforeSend: function() {
 
-                    if (data.status === 200) {
-                        console.log(data);
-                        var totAL = 0,
-                            subtotal = 0;
+                    },
+                    success: function(data) {
 
-                        for (const key in data.data) {
-                            subtotal = data.data[key].precio * data.data[key].items;
-                            totAL += subtotal;
-                            output += `
-                    <div class="items">
-                        <div class="justify-content">
-                            <img alt="America Car Rental" class="img-producto" src="${data.data[key].imagen}">
-                        </div>
-                        <div  class="descripcion-pre" >
-                            <h2 class="titulo-producto">${data.data[key].nombre}</h2>
-                            <p style="font-size: 15px;">@lang('translation.clave')<span style="font-weight: bold;"> ${data.data[key].claveProducto}</span> </p>
-                            <p style="font-size: 15px;">@lang('translation.pax')<span style="font-weight: bold;"> ${data.data[key].items}</span> </p>
-                        </div>
-                        <div class="total">
-                            <div>
-                                <p style="font-size: 16px;display: flex;">$${subtotal} USD</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr style="     height: 1px;   background-color: #968a8a;   border-style: none;">
-               `;
+                        if (data.status === 200) {
+                            console.log(data);
+                            var totAL = 0,
+                                subtotal = 0;
+                            var frm = document.getElementById("reserva");
+                            var formula = new FormData(frm);
+                            let object = datos(formula);
+
+                            for (const key in data.data) {
+                                subtotal = data.data[key].precio * data.data[key].items;
+                                totAL += subtotal;
+                                output += `<div class="items"> <div class="justify-content"> <img alt="America Car Rental" class="img-producto" src="${data.data[key].imagen}"> </div><div class="descripcion-pre" > <h2 class="titulo-producto">${data.data[key].nombre}</h2> <p style="font-size: 15px;">@lang('translation.clave')<span style="font-weight: bold;"> ${data.data[key].claveProducto}</span> </p><p style="font-size: 15px;">@lang('translation.pax')<span style="font-weight: bold;"> ${data.data[key].items}</span> </p></div><div class="total"> <div> <p style="font-size: 16px;display: flex;">$${subtotal}USD</p></div></div></div><hr style=" height: 1px; background-color: #968a8a; border-style: none;">`;
+                            }
+
+                            let info = `<p style="font-size: 15px;">@lang('translation.cliente'):<span style="font-weight: bold;"> ${object.customer_name}${object.customer_last_name}</span> </p><p style="font-size: 15px;">@lang('translation.correo'):<span style="font-weight: bold;"> ${object.customer_email}</span> </p><p style="font-size: 15px;">@lang('translation.tel'):<span style="font-weight: bold;"> ${object.customer_number_phone}</span> </p>`;
+
+                            output = ` <div> ${output}</div><div style="display: flex;justify-content: flex-end;"> <p style="margin-right: 32px;font-size: 18px;">Total:&nbsp;<span style="font-weight: bold;font-size: 18px;">$${totAL}.00</span></p></div>`;
+
+                            $("#presupuesto").html(output);
+                            $("#infoCliente").html(info);
+
+                            modal.style.display = "block";
+
+                        } else {
+                            $("#presupuesto").html('');
+
                         }
-
-
-                        output = ` <div>
-                            ${output}
-                                </div>
-                              
-                                <div style="display: flex;justify-content: flex-end;">
-                                    <p style="margin-right: 32px;font-size: 18px;">Total:&nbsp;<span style="font-weight: bold;font-size: 18px;">$${totAL}.00</span></p>
-                                </div>`;
-
-                        $("#presupuesto").html(output);
-                        modal.style.display = "block";
-
-                    } else {
-                        $("#presupuesto").html('');
-
                     }
-                }
-            });
+                });
+            }
+
         }
 
         viewCarrito();
@@ -403,12 +451,31 @@
                 method: 'post',
                 dataType: 'json',
                 data: {
+                    'evento': 'items',
                     'idProducto': id,
                 },
                 success: function(data) {
                     if (data.status === 200) {
                         $(`#IrVentanaFlotante`).fadeIn("slow").delay(500).fadeOut("slow");
                     }
+                    viewCarrito();
+
+                }
+            });
+        }
+
+        const reiniciar = () => {
+            $.ajax({
+                url: "{{ route('carrito.destroy') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'post',
+                dataType: 'json',
+                data: {
+                    'evento': 'reiniciar'
+                },
+                success: function(data) {
                     viewCarrito();
 
                 }
