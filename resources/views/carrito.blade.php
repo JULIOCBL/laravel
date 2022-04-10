@@ -12,7 +12,7 @@
     <link href="{{ URL::asset('/assets/css/carrito.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <title>Americn Card Rental | as Carrrito</title>
+    <title>Americn Card Rental | Carrrito</title>
 </head>
 
 <body>
