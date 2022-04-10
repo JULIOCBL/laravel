@@ -1,0 +1,35 @@
+<?php
+return[
+    'inicio' => 'Inicio',
+    'cars' => 'Vehiculos',
+    'promocion' => 'Ofertas',
+    'sucursales' => 'Sucursales',
+    'politicas' => 'Políticas',
+    'contacto' => 'Contacto',
+    'titulo' => 'Autos disponibles para ti',
+    'subTitulo' => 'Encuentra el auto perfecto al mejor precio del mercado',
+    'nota' => 'Auto Económico',
+    'tipo' => 'Manual',
+    'reservar' => 'RESERVAR AUTO',
+    'numero' => '(999) 253 61 00 EXT. 1402',
+    'alternativo' => 'RESERVACIONES/BOOKINGS',
+    'derecho' => 'Reservados todos los derechos.',
+    'productos' => 'Productos',
+    'carrito'=> 'Carrito de compras',
+    'vacio' => 'EL carrito esta vacio',
+    'nombre' => 'Nombre(s)',
+    'apellidos' => 'Apellidos',
+    'correo' => 'Correo',
+    'tel' => 'Numero de telefono',
+    'continuar' => 'Continuar',
+    'total' => 'Total',
+    'presupuesto' => 'Resumen de pago',
+    'detalle' => 'Detalle',
+    'clave' => 'Clave de producto:',
+    'pax' => 'Vehículos:',
+    'info' => 'Informacion del cliente',
+    'eliminar' => 'Se elimino un producto del carrito',
+    'atencion' => 'Atencion'
+]
+
+?>
