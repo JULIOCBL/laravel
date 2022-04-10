@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Carrito;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use App\Http\Controllers\Carrito;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+URL::forceRootUrl('https://laravel-test-site.herokuapp.com/');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
 Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
