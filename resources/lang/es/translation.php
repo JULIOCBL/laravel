@@ -21,7 +21,7 @@ return[
     'apellidos' => 'Apellidos',
     'correo' => 'Correo',
     'tel' => 'Numero de telefono',
-    'continuar' => 'Continuar',
+    'continuar' => 'Reservar ahora',
     'total' => 'Total',
     'presupuesto' => 'Resumen de pago',
     'detalle' => 'Detalle',

@@ -21,7 +21,7 @@ return[
     'apellidos' => 'Last Name',
     'correo' => 'Mail',
     'tel' => 'Phone number',
-    'continuar' => 'Continue',
+    'continuar' => 'Book Now',
     'total' => 'Total',
     'presupuesto' => 'Payment summary',
     'detalle' => 'Detail',
