@@ -56,7 +56,7 @@ Prueba | America Car Central
 
 <span class="inicio"></span>
 <div class="container">
-    <h1 class="font-size-53 margin-5 center">@lang('translation.titulo')</h1>
+    <h1 class="font-size-53 margin-5 center">@lang('translation.titulo') sd</h1>
     <span class="center display-block font-size-20 color-gris">@lang('translation.subTitulo')</span>
 
     
