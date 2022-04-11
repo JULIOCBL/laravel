@@ -11,7 +11,15 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+ mix.js('resources/js/lightslider.js', 'public/assets/js');
+ mix.js('resources/js/scripts.js', 'public/assets/js');
+ mix.js('resources/js/slider.js', 'public/assets/js');
+ 
+ 
+ 
+ mix.postCss('resources/css/all.css', 'public/assets/css', []);
+ mix.postCss('resources/css/normalize.css', 'public/assets/css', []);
+ mix.postCss('resources/css/home.css', 'public/assets/css', []);
+ mix.postCss('resources/css/carrito.css', 'public/assets/css', []);
+ mix.postCss('resources/css/lightslider.css', 'public/assets/css', []);
+ mix.copyDirectory('resources/img', 'public/assets/img');
