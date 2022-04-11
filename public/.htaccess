@@ -18,4 +18,9 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Redireccion a HTTPS
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^laravel-test-site.herokuapp.com [NC]
+    RewriteRule ^(.*)$ https://laravel-test-site.herokuapp.com/$1 [L,R=301]
 </IfModule>
