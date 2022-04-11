@@ -140,6 +140,7 @@
     width: 50%;
     float: left;
     padding: 10px;
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     margin: auto;
@@ -229,6 +230,8 @@
     .descripcion-pre {
     width: 400px;
     float: left;
+    height: -webkit-max-content;
+    height: -moz-max-content;
     height: max-content;
     }
    
