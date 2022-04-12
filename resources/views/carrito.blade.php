@@ -242,7 +242,7 @@
                         $('#pax_resumen').html(detalle);
                     } else {
                         $('#pax_resumen').html('');
-                        $('#total_purchase').html(`Total: $0.00`);
+                        $('#total_purchase').html(`Total: $0.00 USD`);
                     }
                 }
             });
