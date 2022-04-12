@@ -417,12 +417,12 @@
                             for (const key in data.data) {
                                 subtotal = data.data[key].precio * data.data[key].items;
                                 totAL += subtotal;
-                                output += `<div class="items"> <div class="justify-content"> <img alt="America Car Rental" class="img-producto" src="${data.data[key].imagen}"> </div><div class="descripcion-pre" > <h2 class="titulo-producto">${data.data[key].nombre}</h2> <p style="font-size: 15px;">@lang('translation.clave')<span style="font-weight: bold;"> ${data.data[key].claveProducto}</span> </p><p style="font-size: 15px;">@lang('translation.pax')<span style="font-weight: bold;"> ${data.data[key].items}</span> </p></div><div class="total"> <div> <p style="font-size: 16px;display: flex;">$${subtotal}USD</p></div></div></div><hr style=" height: 1px; background-color: #968a8a; border-style: none;">`;
+                                output += `<div class="items"> <div class="justify-content"> <img alt="America Car Rental" class="img-producto" src="${data.data[key].imagen}"> </div><div class="descripcion-pre" > <h2 class="titulo-producto">${data.data[key].nombre}</h2> <p style="font-size: 15px;">@lang('translation.clave')<span style="font-weight: bold;"> ${data.data[key].claveProducto}</span> </p><p style="font-size: 15px;">@lang('translation.pax')<span style="font-weight: bold;"> ${data.data[key].items}</span> </p></div><div class="total"> <div> <p style="font-size: 16px;display: flex;">$${subtotal} USD</p></div></div></div><hr style=" height: 1px; background-color: #968a8a; border-style: none;">`;
                             }
 
                             let info = `<p style="font-size: 15px;">@lang('translation.cliente'):<span style="font-weight: bold;"> ${object.customer_name}${object.customer_last_name}</span> </p><p style="font-size: 15px;">@lang('translation.correo'):<span style="font-weight: bold;"> ${object.customer_email}</span> </p><p style="font-size: 15px;">@lang('translation.tel'):<span style="font-weight: bold;"> ${object.customer_number_phone}</span> </p>`;
 
-                            output = ` <div> ${output}</div><div style="display: flex;justify-content: flex-end;"> <p style="margin-right: 32px;font-size: 18px;">Total:&nbsp;<span style="font-weight: bold;font-size: 18px;">$${totAL}.00</span></p></div>`;
+                            output = ` <div> ${output}</div><div style="display: flex;justify-content: flex-end;"> <p style="margin-right: 32px;font-size: 18px;">Total:&nbsp;<span style="font-weight: bold;font-size: 18px;">$${totAL}.00 USD</span></p></div>`;
 
                             $("#presupuesto").html(output);
                             $("#infoCliente").html(info);
