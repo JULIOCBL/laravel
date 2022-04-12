@@ -315,7 +315,7 @@
                         }
                         $('#pax_resumen').html(detalle);
 
-                        $('#total_purchase').html(`Total: $${total}.00`);
+                        $('#total_purchase').html(`Total: $${total}.00 USD`);
 
                     }
                 }
